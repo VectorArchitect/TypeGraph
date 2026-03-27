@@ -1,4 +1,4 @@
 This is an interactive tool that brings text to life through CSS-driven animated typography. Edit, refresh, and watch your words transform in real time.
 
 <img src="TYpeGraph-_-.png">
-<img src="TypeGraph_.gif" alt="Description" width="400" height="300" />
+<img src="TypeGraph_.gif" alt="TypeGraphGif" width="900" height="400" />
