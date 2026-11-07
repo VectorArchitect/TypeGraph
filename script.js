@@ -31,7 +31,14 @@ function stopRandomizing(char) {
   char.textContent = char.dataset.char;
 }
 
+function clearRandomizing() {
+  intervals.forEach((interval) => clearInterval(interval));
+  intervals.clear();
+}
+
 function renderLogo(text) {
+  // Stop timers before detaching the characters they update.
+  clearRandomizing();
   logo.innerHTML = "";
   logo.style.opacity = "1";
   const words = text.match(/(\S+|\s)/g);
@@ -79,13 +86,28 @@ document.getElementById("editBtn").addEventListener("click", () => {
   editInput.focus();
 });
 
-submitEdit.addEventListener("click", () => {
+function closeEditModal() {
+  editModal.style.display = "none";
+}
+
+function applyEdit() {
   const newText = editInput.value.trim();
   if (newText) {
     userText = newText;
     renderLogo(userText);
   }
-  editModal.style.display = "none";
+  closeEditModal();
+}
+
+submitEdit.addEventListener("click", applyEdit);
+
+editInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    applyEdit();
+  } else if (e.key === "Escape") {
+    closeEditModal();
+  }
 });
 
 document.getElementById("refreshBtn").addEventListener("click", () => {
